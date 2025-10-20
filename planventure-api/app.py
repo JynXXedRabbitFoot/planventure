@@ -14,6 +14,18 @@ load_dotenv()
 # Initialize Flask app
 app = Flask(__name__)
 
+# Configure CORS
+CORS(app, resources={
+    r"/*": {
+        "origins": os.getenv('CORS_ORIGIN', 'http://localhost:3000'),
+        "methods": os.getenv('CORS_METHODS', 'GET,POST,PUT,DELETE,OPTIONS').split(','),
+        "allow_headers": ["Content-Type", "Authorization"],
+        "expose_headers": ["Content-Range", "X-Content-Range"],
+        "supports_credentials": True,
+        "max_age": 600
+    }
+})
+
 # Configure SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///planventure.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -21,7 +33,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-please-change')
 
 # Initialize extensions
 db.init_app(app)
-CORS(app)
 
 # JWT Configuration
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-key-please-change')
