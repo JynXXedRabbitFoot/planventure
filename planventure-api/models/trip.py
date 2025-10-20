@@ -1,5 +1,7 @@
 from database import db, TimestampMixin
 from datetime import datetime
+from utils.itinerary import generate_itinerary_template
+from sqlalchemy import event
 
 class Trip(TimestampMixin, db.Model):
     __tablename__ = 'trips'
@@ -21,6 +23,10 @@ class Trip(TimestampMixin, db.Model):
     def __repr__(self):
         return f'<Trip {self.title} ({self.start_date} - {self.end_date})>'
 
+    def generate_default_itinerary(self):
+        """Generate a default itinerary based on trip dates."""
+        return generate_itinerary_template(self.start_date, self.end_date)
+
     def to_dict(self):
         """Convert trip to dictionary."""
         return {
@@ -37,3 +43,9 @@ class Trip(TimestampMixin, db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
+
+@event.listens_for(Trip, 'before_insert')
+def set_default_itinerary(mapper, connection, target):
+    """Generate default itinerary before insert if none exists"""
+    if target.itinerary is None:
+        target.itinerary = target.generate_default_itinerary()
