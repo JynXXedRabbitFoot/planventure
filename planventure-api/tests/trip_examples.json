@@ -1,0 +1,72 @@
+{
+  "basic_trip": {
+    "title": "Weekend in Paris",
+    "description": "A romantic weekend getaway in the City of Light",
+    "location": "Paris, France",
+    "start_date": "2024-06-15",
+    "end_date": "2024-06-17",
+    "latitude": 48.8566,
+    "longitude": 2.3522,
+    "itinerary": {
+      "day1": {
+        "morning": "Eiffel Tower visit",
+        "afternoon": "Louvre Museum tour",
+        "evening": "Seine River dinner cruise"
+      },
+      "day2": {
+        "morning": "Breakfast at local café",
+        "afternoon": "Shopping at Champs-Élysées",
+        "evening": "Fine dining at L'Abeille"
+      }
+    }
+  },
+  "extended_trip": {
+    "title": "Japan Adventure",
+    "description": "Two-week exploration of Japanese culture and cities",
+    "location": "Tokyo, Japan",
+    "start_date": "2024-09-01",
+    "end_date": "2024-09-14",
+    "latitude": 35.6762,
+    "longitude": 139.6503,
+    "itinerary": {
+      "week1": {
+        "tokyo": {
+          "activities": [
+            "Shibuya Crossing",
+            "Senso-ji Temple",
+            "Tokyo Skytree"
+          ],
+          "accommodations": "Hotel in Shinjuku"
+        },
+        "kyoto": {
+          "activities": [
+            "Fushimi Inari Shrine",
+            "Bamboo Forest",
+            "Tea Ceremony"
+          ],
+          "accommodations": "Traditional Ryokan"
+        }
+      },
+      "week2": {
+        "osaka": {
+          "activities": [
+            "Osaka Castle",
+            "Street Food Tour",
+            "Universal Studios"
+          ],
+          "accommodations": "City Center Hotel"
+        }
+      }
+    }
+  },
+  "minimal_trip": {
+    "title": "Day Trip to Beach",
+    "description": null,
+    "location": "Santa Monica, CA",
+    "start_date": "2024-07-04",
+    "end_date": "2024-07-04",
+    "latitude": 34.0195,
+    "longitude": -118.4912,
+    "itinerary": null
+  }
+}

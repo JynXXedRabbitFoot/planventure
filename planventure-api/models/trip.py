@@ -6,9 +6,11 @@ class Trip(TimestampMixin, db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    destination = db.Column(db.String(200), nullable=False)
-    start_date = db.Column(db.DateTime, nullable=False)
-    end_date = db.Column(db.DateTime, nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500))
+    location = db.Column(db.String(100), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     itinerary = db.Column(db.JSON)
@@ -17,4 +19,21 @@ class Trip(TimestampMixin, db.Model):
     user = db.relationship('User', back_populates='trips')
 
     def __repr__(self):
-        return f'<Trip {self.destination} ({self.start_date} - {self.end_date})>'
+        return f'<Trip {self.title} ({self.start_date} - {self.end_date})>'
+
+    def to_dict(self):
+        """Convert trip to dictionary."""
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'location': self.location,
+            'start_date': self.start_date.isoformat() if self.start_date else None,
+            'end_date': self.end_date.isoformat() if self.end_date else None,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'itinerary': self.itinerary,
+            'user_id': self.user_id,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
